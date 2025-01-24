@@ -51,36 +51,77 @@ console.log(me);
 /* ESERCIZIO 1
   Crea una funzione chiamata "dice": deve generare un numero casuale tra 1 e 6.
 */
-
+const dice = () => {
+  return Math.floor(Math.random() * 6) + 1;
+};
+console.log(dice());
 /* ESERCIZIO 2
   Crea una funzione chiamata "whoIsBigger" che riceve due numeri come parametri e ritorna il maggiore dei due.
 */
-
+const whoIsBigger = (n1, n2) => {
+  if (n1 > n2) {
+    console.log(n1 + " è il numero maggiore");
+  } else if (n1 < n2) {
+    console.log(`${n2} è il numero maggiore`);
+  } else console.log(`${n1} e ${n2} sono uguali`);
+};
+whoIsBigger(5, 3);
 /* ESERCIZIO 3
   Crea una funzione chiamata "splitMe" che riceve una stringa come parametro e ritorna un'array contenente ogni parola della stringa.
 
   Es.: splitMe("I love coding") => ritorna ["I", "Love", "Coding"]
 */
-
+const splitMe = (string) => {
+  return string.split(" ");
+};
+console.log(splitMe("ciao sono marco"));
 /* ESERCIZIO 4
   Crea una funzione chiamata "deleteOne" che riceve una stringa e un booleano come parametri.
   Se il valore booleano è true la funzione deve ritornare la stringa senza il primo carattere, altrimenti la deve ritornare senza l'ultimo.
 */
-
+const deleteOne = (string, boolean) => {
+  if (boolean == true) {
+    return string.slice(1);
+  } else return string.slice(0, -1);
+};
+console.log(deleteOne("ciso", false));
 /* ESERCIZIO 5
   Crea una funzione chiamata "onlyLetters" che riceve una stringa come parametro e la ritorna eliminando tutte le cifre numeriche.
 
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
-
+const onlyLetters = (string) => {
+  return string.replace(/[0-9]/g, "");
+};
+console.log(onlyLetters("I have 4 dogs"));
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
-
+const isThisAnEmail = (string) => {
+  let regex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/;
+  console.log(regex.test(string));
+};
+isThisAnEmail("marco@gmail.com");
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
-
+const giorni = [
+  "domeninca",
+  "lunedì",
+  "martedì",
+  "mercoledì",
+  "giovedì",
+  "venerdì",
+  "sabato",
+];
+const giorno = new Date();
+const oggi = giorno.getDay();
+const whatDayIsIt = () => {
+  const giornoEsatto = giorni[oggi];
+  return giornoEsatto;
+};
+console.log(whatDayIsIt());
 /* ESERCIZIO 8
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
   Deve invocare la precedente funzione dice() il numero di volte specificato nel parametro, e deve tornare un oggetto contenente una proprietà "sum":
@@ -93,15 +134,44 @@ console.log(me);
       values: [3, 3, 4]
   }
 */
-
+const rollTheDices = (n) => {
+  let oggetto = {
+    sum: 0,
+    values: [],
+  };
+  for (let index = 0; index < n; index++) {
+    let valore = dice();
+    oggetto.sum += valore;
+    oggetto.values.push(valore);
+  }
+  return oggetto;
+};
+console.log(rollTheDices(5));
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
+const howManyDays = (data) => {
+  const oggi = new Date();
+  const dataCasuale = new Date(data);
+  const conteggio = oggi - dataCasuale;
+  const giorniTrascorsi = Math.floor(conteggio / (1000 * 60 * 60 * 24));
 
+  return giorniTrascorsi;
+};
+console.log(howManyDays("2025-01-22"));
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
-
+const isTodayMyBirthday = (birthDate) => {
+  const oggi = new Date();
+  const birthMonth = birthDate.getMonth();
+  const birthDay = birthDate.getDate();
+  const currentMonth = oggi.getMonth();
+  const currentDay = oggi.getDate();
+  return birthMonth === currentMonth && birthDay === currentDay;
+};
+const myBirthDate = new Date("2000-01-24");
+console.log(isTodayMyBirthday(myBirthDate));
 // Arrays & Oggetti
 
 // NOTA: l'array "movies" usato in alcuni esercizi è definito alla fine di questo file
